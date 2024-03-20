@@ -49,6 +49,15 @@ a {
     width: 80%;
     overflow: auto;
 }
+.ms_box {
+    aspect-ratio: 1 / 1;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    cursor: crosshair;
+}
 
 /* flex utility  */
 /* media query  */

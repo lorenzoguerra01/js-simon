@@ -59,33 +59,44 @@ function isUniqueArray(elements, min, max) {
     }
     return array
 }
-function generateBoxes(numBoxes, boxDimension, text) {
-    let container = document.createElement('div');
-    container.classList.add()
-    for (let i = 0; i < numBoxes; i++) {
-        let box = document.createElement('div');
-        box.classList.add("ms_box");
-        box.style.width = ` calc(100% / ${boxDimension})`;
-        box.style.aspectRatio = 1 / 1;
-        box.innerHTML = text;
-        container.append(box);
-    }
-    return container;
-}
-function generateBoxes(numBoxes, boxDimension, text) {
+function isGenerateBoxes(numBoxes, boxInRow, text) {
     let container = document.createElement('div');
     container.classList.add("d-flex", "flex-wrap", "m-5");
     for (let i = 0; i < numBoxes; i++) {
         let box = document.createElement('div');
         box.classList.add("ms_box");
-        box.style.width = `calc(100% / ${boxDimension})`;
+        box.style.width = `calc(100% / ${boxInRow})`;
         box.style.aspectRatio = '1 / 1';
-        box.innerHTML = text[i];
+        if (Array.isArray(text)) {
+            box.innerHTML = text[i];
+        } else if (text === undefined) {
+            box.innerHTML = i;
+        } else {
+            box.innerHTML = text;
+        }
         container.appendChild(box);
     }
     return container;
 }
-
+function isPromptNumber(text) {
+    let input
+    do {
+        input = parseInt(prompt(text));
+    } while (isNaN(input));
+    return input
+}
+function isPrompString(text) {
+    let input
+    do {
+        input = prompt(text);
+    } while (!isNaN(input));
+    return input
+}
+function isRepeat(callback, times) {
+    for (let i = 0; i < times; i++) {
+        callback()
+    }
+}
 // global variables 
 
 let reply = document.querySelector(".reply");

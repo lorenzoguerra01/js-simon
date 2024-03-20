@@ -10,8 +10,26 @@ elBtnPlay.addEventListener("click", function () {
     reply.innerHTML = ""
     let random = isUniqueArray(5, 1, 100);
     console.log(random);
-    reply.appendChild(generateBoxes(5, 5, random))
+    reply.appendChild(isGenerateBoxes(5, 5, random))
     setTimeout(() => {
+        reply.innerHTML = ""
+        reply.appendChild(isGenerateBoxes(5, 5, "?"))
+        setTimeout(() => {
+            let guessed = []
+            isRepeat(() => {
+                let guess = isPromptNumber("Inserisci un numero");
+                if (random.includes(guess)) {
+                    if(!guessed.includes(guess)){
+                        guessed.push(guess);
+                    }
+                }
+            }, 5)
+            if (guessed.length === 0) {
+                reply.innerHTML = `<div class="text-danger fs-1 ">OH NO, NON HAI INDOVINATO NEANCHE UN NUMERO!</div>`
+            } else {
+                reply.innerHTML = `<div class="text-success fs-1 ">Hai indovinato ${guessed.length + " numeri su " + random.length + " = " + guessed}</div>`
+            }
+        }, 10)
         console.log("ciao");
-    }, 30 * 1000)
+    }, 1000)
 })
